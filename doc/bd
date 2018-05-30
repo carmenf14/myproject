@@ -1,0 +1,282 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
+
+-- Started on 2018-05-26 23:10:22
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 1 (class 3079 OID 12387)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2159 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 187 (class 1259 OID 25333)
+-- Name: cursuri; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE cursuri (
+    id bigint NOT NULL,
+    denumire character varying(100) NOT NULL,
+    id_profesor bigint NOT NULL,
+    descriere character varying(1000)
+);
+
+
+ALTER TABLE cursuri OWNER TO postgres;
+
+--
+-- TOC entry 189 (class 1259 OID 25358)
+-- Name: cursuri_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE cursuri_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cursuri_seq OWNER TO postgres;
+
+--
+-- TOC entry 188 (class 1259 OID 25343)
+-- Name: cursurixstudenti; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE cursurixstudenti (
+    id_student bigint NOT NULL,
+    id_curs bigint NOT NULL
+);
+
+
+ALTER TABLE cursurixstudenti OWNER TO postgres;
+
+--
+-- TOC entry 186 (class 1259 OID 25328)
+-- Name: profesori; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE profesori (
+    id bigint NOT NULL,
+    nume character varying(100) NOT NULL,
+    prenume character varying(100) NOT NULL,
+    email character varying(100) NOT NULL,
+    parola character varying(100) NOT NULL
+);
+
+
+ALTER TABLE profesori OWNER TO postgres;
+
+--
+-- TOC entry 190 (class 1259 OID 25360)
+-- Name: profesori_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE profesori_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE profesori_seq OWNER TO postgres;
+
+--
+-- TOC entry 185 (class 1259 OID 25323)
+-- Name: studenti; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE studenti (
+    id bigint NOT NULL,
+    nume character varying(100) NOT NULL,
+    prenume character varying(100) NOT NULL,
+    email character varying(100) NOT NULL,
+    parola character varying(100) NOT NULL
+);
+
+
+ALTER TABLE studenti OWNER TO postgres;
+
+--
+-- TOC entry 191 (class 1259 OID 25362)
+-- Name: studenti_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE studenti_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE studenti_seq OWNER TO postgres;
+
+--
+-- TOC entry 2148 (class 0 OID 25333)
+-- Dependencies: 187
+-- Data for Name: cursuri; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY cursuri (id, denumire, id_profesor, descriere) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2160 (class 0 OID 0)
+-- Dependencies: 189
+-- Name: cursuri_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cursuri_seq', 1, false);
+
+
+--
+-- TOC entry 2149 (class 0 OID 25343)
+-- Dependencies: 188
+-- Data for Name: cursurixstudenti; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY cursurixstudenti (id_student, id_curs) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2147 (class 0 OID 25328)
+-- Dependencies: 186
+-- Data for Name: profesori; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY profesori (id, nume, prenume, email, parola) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2161 (class 0 OID 0)
+-- Dependencies: 190
+-- Name: profesori_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('profesori_seq', 1, false);
+
+
+--
+-- TOC entry 2146 (class 0 OID 25323)
+-- Dependencies: 185
+-- Data for Name: studenti; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY studenti (id, nume, prenume, email, parola) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2162 (class 0 OID 0)
+-- Dependencies: 191
+-- Name: studenti_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('studenti_seq', 1, false);
+
+
+--
+-- TOC entry 2023 (class 2606 OID 25337)
+-- Name: cursuri cursuri_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cursuri
+    ADD CONSTRAINT cursuri_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2025 (class 2606 OID 25347)
+-- Name: cursurixstudenti cursurixstudenti_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cursurixstudenti
+    ADD CONSTRAINT cursurixstudenti_pkey PRIMARY KEY (id_student, id_curs);
+
+
+--
+-- TOC entry 2021 (class 2606 OID 25332)
+-- Name: profesori profesori_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY profesori
+    ADD CONSTRAINT profesori_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2019 (class 2606 OID 25327)
+-- Name: studenti studenti_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY studenti
+    ADD CONSTRAINT studenti_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2027 (class 2606 OID 25348)
+-- Name: cursurixstudenti curs_FK; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cursurixstudenti
+    ADD CONSTRAINT "curs_FK" FOREIGN KEY (id_curs) REFERENCES cursuri(id);
+
+
+--
+-- TOC entry 2026 (class 2606 OID 25338)
+-- Name: cursuri curs_profesor_FK; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cursuri
+    ADD CONSTRAINT "curs_profesor_FK" FOREIGN KEY (id_profesor) REFERENCES profesori(id);
+
+
+--
+-- TOC entry 2028 (class 2606 OID 25353)
+-- Name: cursurixstudenti student_FK; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cursurixstudenti
+    ADD CONSTRAINT "student_FK" FOREIGN KEY (id_student) REFERENCES studenti(id);
+
+
+-- Completed on 2018-05-26 23:10:22
+
+--
+-- PostgreSQL database dump complete
+--
+
